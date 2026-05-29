@@ -8,11 +8,21 @@ export const contact = {
 };
 
 export const navItems = [
-  { label: "Work", href: "#work" },
+  { label: "Home", href: "#home" },
+  { label: "About", href: "#about" },
+  { label: "Process", href: "#process" },
   { label: "Skills", href: "#skills" },
+  { label: "Projects", href: "#projects" },
   { label: "Experience", href: "#experience" },
-  { label: "Education", href: "#education" },
+  { label: "Resume", href: "#resume" },
   { label: "Contact", href: "#contact" }
+];
+
+export const typedRoles = [
+  "Full-Stack .NET Developer",
+  "React + TypeScript Engineer",
+  "Accessibility-Focused Builder",
+  "SQL-Backed Systems Developer"
 ];
 
 export const highlights = [
@@ -20,6 +30,33 @@ export const highlights = [
   { value: "3+", label: "years building web apps" },
   { value: "508", label: "accessibility-focused delivery" },
   { value: "CI/CD", label: "release support with Azure DevOps" }
+];
+
+export const deliveryPillars = [
+  {
+    kicker: "01",
+    title: "Understand the workflow",
+    description:
+      "Map the user path, edge cases, validation rules, and legacy constraints before turning requirements into screens."
+  },
+  {
+    kicker: "02",
+    title: "Design the interface",
+    description:
+      "Build responsive, accessible UI patterns with predictable states, keyboard support, and clear data feedback."
+  },
+  {
+    kicker: "03",
+    title: "Stabilize the backend",
+    description:
+      "Connect .NET APIs, data-access logic, SQL queries, and service boundaries around the real business process."
+  },
+  {
+    kicker: "04",
+    title: "Verify the release",
+    description:
+      "Support QA, UAT, accessibility review, Azure DevOps release flow, and documentation with a delivery mindset."
+  }
 ];
 
 export const stackGroups = [

@@ -1,30 +1,44 @@
-import { useMemo, useState } from "react";
+import {
+  type CSSProperties,
+  type PointerEvent,
+  useEffect,
+  useMemo,
+  useState
+} from "react";
 import {
   Accessibility,
+  ArrowDown,
   ArrowUpRight,
+  BadgeCheck,
   BriefcaseBusiness,
+  Check,
   Code2,
+  Copy,
+  Cpu,
   Database,
   Download,
+  FileText,
   GraduationCap,
+  Layers3,
   Mail,
   MapPin,
   Phone,
   ServerCog,
   ShieldCheck,
-  Smartphone,
   Sparkles,
   Workflow
 } from "lucide-react";
 import {
   contact,
+  deliveryPillars,
   education,
   experience,
   focusAreas,
   highlights,
   navItems,
   projectWork,
-  stackGroups
+  stackGroups,
+  typedRoles
 } from "./data/portfolio";
 
 const skillIcons: Record<string, JSX.Element> = {
@@ -32,7 +46,7 @@ const skillIcons: Record<string, JSX.Element> = {
   Backend: <ServerCog aria-hidden="true" />,
   Data: <Database aria-hidden="true" />,
   Tools: <Workflow aria-hidden="true" />,
-  Mobile: <Smartphone aria-hidden="true" />,
+  Mobile: <Layers3 aria-hidden="true" />,
   Libraries: <Sparkles aria-hidden="true" />,
   "Accessibility & AI": <Accessibility aria-hidden="true" />
 };
@@ -42,15 +56,95 @@ const focusIcons = [
   <Code2 aria-hidden="true" />,
   <Database aria-hidden="true" />,
   <Workflow aria-hidden="true" />,
-  <Sparkles aria-hidden="true" />
+  <BadgeCheck aria-hidden="true" />
 ];
 
 const filters = ["All", ...stackGroups.map((group) => group.label)];
 
 type Project = (typeof projectWork)[number];
+type TiltStyle = CSSProperties & {
+  "--tilt-x": string;
+  "--tilt-y": string;
+};
 
 function App() {
   const [activeFilter, setActiveFilter] = useState("All");
+  const [activeProjectIndex, setActiveProjectIndex] = useState(0);
+  const [activeSection, setActiveSection] = useState("home");
+  const [copiedEmail, setCopiedEmail] = useState(false);
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [typedLength, setTypedLength] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [heroTilt, setHeroTilt] = useState<TiltStyle>({
+    "--tilt-x": "0deg",
+    "--tilt-y": "0deg"
+  });
+
+  const activeProject = projectWork[activeProjectIndex];
+  const activeRole = typedRoles[roleIndex];
+  const typedRole = activeRole.slice(0, typedLength);
+
+  useEffect(() => {
+    const updateScrollProgress = () => {
+      const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = scrollableHeight <= 0 ? 0 : window.scrollY / scrollableHeight;
+      setScrollProgress(Math.min(1, Math.max(0, progress)));
+    };
+
+    updateScrollProgress();
+    window.addEventListener("scroll", updateScrollProgress, { passive: true });
+    window.addEventListener("resize", updateScrollProgress);
+
+    return () => {
+      window.removeEventListener("scroll", updateScrollProgress);
+      window.removeEventListener("resize", updateScrollProgress);
+    };
+  }, []);
+
+  useEffect(() => {
+    const sections = navItems
+      .map((item) => document.getElementById(item.href.replace("#", "")))
+      .filter(Boolean) as HTMLElement[];
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleEntry = entries.find((entry) => entry.isIntersecting);
+
+        if (visibleEntry) {
+          setActiveSection(visibleEntry.target.id);
+        }
+      },
+      { rootMargin: "-38% 0px -52% 0px", threshold: 0.01 }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const atFullText = typedLength === activeRole.length;
+    const atEmptyText = typedLength === 0;
+    const delay = atFullText && !isDeleting ? 1200 : isDeleting ? 34 : 58;
+
+    const timeout = window.setTimeout(() => {
+      if (atFullText && !isDeleting) {
+        setIsDeleting(true);
+        return;
+      }
+
+      if (atEmptyText && isDeleting) {
+        setIsDeleting(false);
+        setRoleIndex((index) => (index + 1) % typedRoles.length);
+        return;
+      }
+
+      setTypedLength((length) => length + (isDeleting ? -1 : 1));
+    }, delay);
+
+    return () => window.clearTimeout(timeout);
+  }, [activeRole, isDeleting, typedLength]);
 
   const visibleGroups = useMemo(() => {
     if (activeFilter === "All") {
@@ -60,86 +154,146 @@ function App() {
     return stackGroups.filter((group) => group.label === activeFilter);
   }, [activeFilter]);
 
+  const handleHeroPointer = (event: PointerEvent<HTMLDivElement>) => {
+    const bounds = event.currentTarget.getBoundingClientRect();
+    const x = (event.clientX - bounds.left) / bounds.width - 0.5;
+    const y = (event.clientY - bounds.top) / bounds.height - 0.5;
+
+    setHeroTilt({
+      "--tilt-x": `${(-y * 8).toFixed(2)}deg`,
+      "--tilt-y": `${(x * 10).toFixed(2)}deg`
+    });
+  };
+
+  const resetHeroTilt = () => {
+    setHeroTilt({ "--tilt-x": "0deg", "--tilt-y": "0deg" });
+  };
+
+  const handleCopyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(contact.email);
+      setCopiedEmail(true);
+      window.setTimeout(() => setCopiedEmail(false), 1800);
+    } catch {
+      setCopiedEmail(false);
+    }
+  };
+
   return (
     <div className="site-shell">
+      <div className="scroll-progress" style={{ transform: `scaleX(${scrollProgress})` }} />
+
       <header className="topbar">
-        <a className="brand" href="#top" aria-label="Akhil N Muthyala home">
+        <a className="brand" href="#home" aria-label="Akhil N Muthyala home">
           <span className="brand-mark">AM</span>
           <span>{contact.name}</span>
         </a>
         <nav aria-label="Primary navigation">
           {navItems.map((item) => (
-            <a key={item.href} href={item.href}>
+            <a
+              className={activeSection === item.href.slice(1) ? "active" : undefined}
+              key={item.href}
+              href={item.href}
+            >
               {item.label}
             </a>
           ))}
         </nav>
       </header>
 
-      <main id="top">
-        <section className="hero section-pad" aria-labelledby="hero-title">
-          <div className="hero-profile">
-            <div className="avatar-frame" aria-hidden="true">
-              <span>AM</span>
+      <main>
+        <section id="home" className="hero section-pad" aria-labelledby="hero-title">
+          <div className="hero-copy">
+            <p className="hello">Full-stack software engineer</p>
+            <h1 id="hero-title">
+              Designing dependable systems for complex product teams.
+            </h1>
+            <p className="type-line">
+              I am a <span>{typedRole}</span>
+              <i aria-hidden="true" />
+            </p>
+            <p className="hero-lede">
+              I build accessible React interfaces, dependable .NET services, and SQL-backed
+              enterprise workflows for teams modernizing high-stakes products.
+            </p>
+
+            <div className="hero-status" aria-label="Current focus">
+              <span>Now</span>
+              <strong>Deloitte modernization</strong>
+              <span>React / .NET / SQL / 508</span>
             </div>
-            <div>
-              <span className="profile-kicker">Hey, I am</span>
-              <strong>{contact.name}</strong>
-              <small>{contact.location}</small>
+
+            <div className="cta-row" aria-label="Contact and resume actions">
+              <a className="btn primary" href={`mailto:${contact.email}`}>
+                <Mail aria-hidden="true" />
+                Email me
+              </a>
+              <a className="btn secondary" href={contact.resumeHref}>
+                <Download aria-hidden="true" />
+                Download CV
+              </a>
+              <a className="icon-link" href="#about" aria-label="Go to about section">
+                <ArrowDown aria-hidden="true" />
+              </a>
+            </div>
+
+            <div className="contact-inline" aria-label="Contact details">
+              <span>
+                <MapPin aria-hidden="true" />
+                {contact.location}
+              </span>
+              <a href={`tel:${contact.phone}`}>
+                <Phone aria-hidden="true" />
+                {contact.phone}
+              </a>
+              <a href={`mailto:${contact.email}`}>
+                <Mail aria-hidden="true" />
+                {contact.email}
+              </a>
             </div>
           </div>
 
-          <p className="eyebrow">Portfolio / Software Engineering</p>
-          <h1 id="hero-title">{contact.name}</h1>
-          <p className="role-line">I am a Software Engineer |</p>
-          <p className="hero-lede">
-            I build accessible React interfaces, reliable .NET services, and SQL-backed
-            workflows for teams modernizing complex enterprise systems.
-          </p>
-
-          <div className="cta-row" aria-label="Contact and resume actions">
-            <a className="btn primary" href={`mailto:${contact.email}`}>
-              <Mail aria-hidden="true" />
-              Email me
-            </a>
-            <a className="btn secondary" href={contact.resumeHref}>
-              <Download aria-hidden="true" />
-              Resume
-            </a>
-          </div>
-
-          <div className="contact-inline" aria-label="Contact details">
-            <span>
-              <MapPin aria-hidden="true" />
-              {contact.location}
-            </span>
-            <a href={`tel:${contact.phone}`}>
-              <Phone aria-hidden="true" />
-              {contact.phone}
-            </a>
-            <a href={`mailto:${contact.email}`}>
-              <Mail aria-hidden="true" />
-              {contact.email}
-            </a>
-          </div>
-
-          <div className="orbit-panel" aria-hidden="true">
-            <span className="orbit-glyph">{"<>"}</span>
-            <span>React</span>
-            <span>.NET</span>
-            <span>SQL</span>
-            <span>Azure</span>
+          <div
+            className="hero-stage"
+            onPointerLeave={resetHeroTilt}
+            onPointerMove={handleHeroPointer}
+            style={heroTilt}
+          >
+            <div className="stage-grid" aria-hidden="true" />
+            <div className="hero-image-wrap">
+              <img
+                src="/developer-workspace.png"
+                alt="Dark developer workstation with code, database, cloud, and accessibility panels"
+              />
+            </div>
+            <div className="stage-panel stage-panel-top">
+              <Cpu aria-hidden="true" />
+              <div>
+                <span>System focus</span>
+                <strong>Modernization</strong>
+              </div>
+            </div>
+            <div className="stage-panel stage-panel-right">
+              <Accessibility aria-hidden="true" />
+              <div>
+                <span>A11y checks</span>
+                <strong>508 ready</strong>
+              </div>
+            </div>
+            <div className="stage-panel stage-panel-bottom">
+              <Database aria-hidden="true" />
+              <div>
+                <span>Data layer</span>
+                <strong>SQL tuned</strong>
+              </div>
+            </div>
           </div>
         </section>
 
-        <section className="work-glow section-pad" aria-labelledby="focus-title">
-          <div className="section-heading centered">
-            <p className="eyebrow">Work Experience</p>
-            <h2 id="focus-title">Practical full-stack delivery with a product mindset.</h2>
-          </div>
-          <div className="highlight-grid">
+        <section className="proof-strip section-pad" aria-label="Professional highlights">
+          <div className="proof-grid">
             {highlights.map((item, index) => (
-              <article className="highlight-card" key={item.label}>
+              <article className="proof-card interactive-card" key={item.label}>
                 <div className="card-icon">{focusIcons[index % focusIcons.length]}</div>
                 <strong>{item.value}</strong>
                 <span>{item.label}</span>
@@ -148,67 +302,82 @@ function App() {
           </div>
         </section>
 
-        <section className="section section-pad" aria-labelledby="focus-list-title">
-          <div className="focus-layout">
-            <div className="section-heading">
-              <p className="eyebrow">Build Focus</p>
-              <h2 id="focus-list-title">What I bring into a delivery team.</h2>
+        <section id="about" className="section section-pad about-section" aria-labelledby="about-title">
+          <div className="section-heading split">
+            <div>
+              <p className="eyebrow">About Me</p>
+              <h2 id="about-title">A practical engineer for polished, reliable web systems.</h2>
             </div>
+            <p>
+              My work is strongest where product-facing UI, backend business logic, database
+              performance, and accessibility need to land together.
+            </p>
+          </div>
+
+          <div className="about-layout">
+            <aside className="profile-card interactive-card" aria-label="Akhil profile">
+              <img
+                src="/akhil-profile.png"
+                alt="Akhil N Muthyala smiling in a light blazer"
+              />
+              <div className="profile-caption">
+                <strong>{contact.name}</strong>
+                <span>{contact.role}</span>
+              </div>
+            </aside>
+
+            <div className="about-copy">
+              <p>
+                I am a full-stack software engineer focused on enterprise modernization,
+                accessibility-minded delivery, and maintainable systems that make complex workflows
+                feel usable.
+              </p>
+              <p>
+                Recently, I have been modernizing legacy child-support workflows with ASP.NET Core,
+                Razor Pages, JavaScript, SQL Server, Azure DevOps, NVDA, JAWS, and Section 508
+                validation.
+              </p>
+            </div>
+
             <div className="focus-list">
               {focusAreas.map((area, index) => (
-                <div className="focus-item" key={area}>
+                <article className="focus-item interactive-card" key={area}>
                   <div className="card-icon">{focusIcons[index % focusIcons.length]}</div>
                   <span>{area}</span>
-                </div>
+                </article>
               ))}
             </div>
           </div>
         </section>
 
-        <section id="work" className="section section-pad project-section" aria-labelledby="work-title">
-          <div className="section-heading centered">
-            <p className="eyebrow">Selected Work</p>
-            <h2 id="work-title">Recent projects shaped around usable systems.</h2>
+        <section id="process" className="section section-pad process-section" aria-labelledby="process-title">
+          <div className="section-heading split">
+            <div>
+              <p className="eyebrow">Delivery System</p>
+              <h2 id="process-title">A professional structure from intake to release.</h2>
+            </div>
             <p>
-              Enterprise modernization, product workflow tools, and full-stack learning systems
-              built across React, TypeScript, ASP.NET Core, and SQL Server.
+              The portfolio is built around how I actually work: clarify the workflow, design the
+              interface, stabilize the backend, and ship with evidence.
             </p>
           </div>
 
-          <div className="project-stack">
-            {projectWork.map((project, index) => (
-              <article
-                className={`project-feature ${index % 2 === 1 ? "reverse" : ""}`}
-                key={project.title}
-              >
-                <ProjectPreview project={project} index={index} />
-                <div className="project-copy">
-                  <div className="project-meta">
-                    <span>{project.company}</span>
-                    <span>{project.period}</span>
-                  </div>
-                  <h3>{project.title}</h3>
-                  <p>{project.summary}</p>
-                  <ul>
-                    {project.impact.slice(0, 3).map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                  <div className="stack-list" aria-label={`${project.title} technology stack`}>
-                    {project.stack.map((item) => (
-                      <span key={item}>{item}</span>
-                    ))}
-                  </div>
-                </div>
+          <div className="process-grid">
+            {deliveryPillars.map((pillar, index) => (
+              <article className="process-card interactive-card" key={pillar.title}>
+                <span className="step-index">{pillar.kicker}</span>
+                <div className="card-icon">{focusIcons[index % focusIcons.length]}</div>
+                <h3>{pillar.title}</h3>
+                <p>{pillar.description}</p>
               </article>
             ))}
           </div>
         </section>
 
-        <section id="skills" className="section section-pad" aria-labelledby="skills-title">
+        <section id="skills" className="section section-pad skill-section" aria-labelledby="skills-title">
           <div className="section-heading centered">
-            <p className="eyebrow">Technical Stack</p>
-            <h2 id="skills-title">Tools I use to turn requirements into stable releases.</h2>
+            <p className="eyebrow">Professional Skillset</p>
+            <h2 id="skills-title">A focused stack for stable web application delivery.</h2>
           </div>
           <div className="filter-bar" role="tablist" aria-label="Skill filters">
             {filters.map((filter) => (
@@ -226,7 +395,7 @@ function App() {
           </div>
           <div className="skills-grid">
             {visibleGroups.map((group) => (
-              <article className="skill-card" key={group.label}>
+              <article className="skill-card interactive-card" key={group.label}>
                 <div className="skill-heading">
                   {skillIcons[group.label]}
                   <h3>{group.label}</h3>
@@ -238,6 +407,63 @@ function App() {
                 </div>
               </article>
             ))}
+          </div>
+        </section>
+
+        <section id="projects" className="section section-pad project-section" aria-labelledby="projects-title">
+          <div className="section-heading split">
+            <div>
+              <p className="eyebrow">Selected Work</p>
+              <h2 id="projects-title">Case studies with real delivery constraints.</h2>
+            </div>
+            <p>
+              Choose a project to review the scope, delivery impact, and stack behind each system.
+            </p>
+          </div>
+
+          <div className="case-study-shell">
+            <div className="case-tabs" role="tablist" aria-label="Project case studies">
+              {projectWork.map((project, index) => (
+                <button
+                  className={activeProjectIndex === index ? "active" : ""}
+                  key={project.title}
+                  onClick={() => setActiveProjectIndex(index)}
+                  role="tab"
+                  type="button"
+                  aria-controls="active-project-panel"
+                  aria-selected={activeProjectIndex === index}
+                >
+                  <span>0{index + 1}</span>
+                  <strong>{project.company}</strong>
+                  <small>{project.title}</small>
+                </button>
+              ))}
+            </div>
+
+            <article className="case-panel" id="active-project-panel" role="tabpanel">
+              <ProjectPreview project={activeProject} index={activeProjectIndex} />
+              <div className="case-copy">
+                <div className="project-meta">
+                  <span>{activeProject.company}</span>
+                  <span>{activeProject.period}</span>
+                </div>
+                <h3>{activeProject.title}</h3>
+                <p>{activeProject.summary}</p>
+                <div className="impact-grid">
+                  {activeProject.impact.slice(0, 3).map((item) => (
+                    <div key={item}>
+                      <Check aria-hidden="true" />
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="stack-list" aria-label={`${activeProject.title} technology stack`}>
+                  {activeProject.stack.map((item) => (
+                    <span key={item}>{item}</span>
+                  ))}
+                </div>
+              </div>
+            </article>
           </div>
         </section>
 
@@ -254,7 +480,7 @@ function App() {
           <div className="career-grid">
             <div className="timeline">
               {experience.map((job) => (
-                <article className="timeline-item" key={`${job.organization}-${job.period}`}>
+                <article className="timeline-item interactive-card" key={`${job.organization}-${job.period}`}>
                   <div className="timeline-marker" aria-hidden="true">
                     <BriefcaseBusiness />
                   </div>
@@ -275,7 +501,7 @@ function App() {
               <h2 id="education-title">Computer science foundation.</h2>
               <div className="education-grid">
                 {education.map((item) => (
-                  <article className="education-card" key={item.school}>
+                  <article className="education-card interactive-card" key={item.school}>
                     <GraduationCap aria-hidden="true" />
                     <div>
                       <h3>{item.school}</h3>
@@ -291,6 +517,35 @@ function App() {
           </div>
         </section>
 
+        <section id="resume" className="section section-pad resume-section" aria-labelledby="resume-title">
+          <div className="section-heading centered">
+            <p className="eyebrow">Resume</p>
+            <h2 id="resume-title">A refined snapshot for hiring teams.</h2>
+            <p>Download the PDF or open it in the browser for the full version.</p>
+          </div>
+
+          <div className="resume-panel interactive-card">
+            <div className="resume-preview" aria-hidden="true">
+              <FileText />
+              <span>PDF</span>
+            </div>
+            <div className="resume-copy">
+              <h3>{contact.name}</h3>
+              <p>{contact.role}</p>
+              <div className="contact-actions">
+                <a className="btn primary" href={contact.resumeHref}>
+                  <Download aria-hidden="true" />
+                  Download CV
+                </a>
+                <a className="btn secondary" href={contact.resumeHref} target="_blank" rel="noreferrer">
+                  <ArrowUpRight aria-hidden="true" />
+                  Open PDF
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section id="contact" className="contact-section section-pad" aria-labelledby="contact-title">
           <div className="contact-glyph" aria-hidden="true">
             AM
@@ -298,19 +553,18 @@ function App() {
           <p className="eyebrow">Contact</p>
           <h2 id="contact-title">Build something dependable together.</h2>
           <p>
-            I am strongest where product-facing UI, enterprise backend logic, and database
-            performance meet. Reach out for full-stack, frontend, or .NET software engineering
-            opportunities.
+            I am open to full-stack, frontend, and .NET software engineering opportunities where
+            product quality, accessibility, and backend reliability matter.
           </p>
           <div className="contact-actions">
             <a className="btn primary" href={`mailto:${contact.email}`}>
               <Mail aria-hidden="true" />
               {contact.email}
             </a>
-            <a className="btn secondary" href={`tel:${contact.phone}`}>
-              <Phone aria-hidden="true" />
-              {contact.phone}
-            </a>
+            <button className="btn secondary" type="button" onClick={handleCopyEmail}>
+              {copiedEmail ? <Check aria-hidden="true" /> : <Copy aria-hidden="true" />}
+              {copiedEmail ? "Copied" : "Copy email"}
+            </button>
             <a className="text-link" href={contact.resumeHref}>
               Resume
               <ArrowUpRight aria-hidden="true" />
@@ -333,7 +587,7 @@ function ProjectPreview({ project, index }: { project: Project; index: number })
         <span />
       </div>
       <div className="preview-title">
-        <small>Project 0{index + 1}</small>
+        <small>Case Study 0{index + 1}</small>
         <strong>{project.company}</strong>
       </div>
       <div className="preview-chart">
