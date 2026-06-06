@@ -149,7 +149,7 @@ function App() {
     document.documentElement.dataset.theme = theme;
     document
       .querySelector("meta[name='theme-color']")
-      ?.setAttribute("content", theme === "dark" ? "#060a16" : "#eef4ff");
+      ?.setAttribute("content", theme === "dark" ? "#070A13" : "#F5F7FB");
     window.localStorage.setItem("portfolio-theme", theme);
   }, [theme]);
 
