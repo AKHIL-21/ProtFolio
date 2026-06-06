@@ -15,4 +15,4 @@ npm run dev
 npm run build
 ```
 
-The resume download used by the site lives at `public/Akhil_N_Muthyala_Resume.pdf`.
+The resume download used by the site lives at `public/Akhil_N_Muthyala_Resume.docx`.
