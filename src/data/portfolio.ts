@@ -1,7 +1,7 @@
 export const contact = {
   name: "Akhil N Muthyala",
-  role: "Full-Stack .NET & React Developer",
-  location: "Lexington, KY, United States",
+  role: "Full Stack Angular & .NET Developer",
+  location: "Austin, TX, United States",
   email: "akhilnmuthyala@gmail.com",
   phone: "(859) 979-7595",
   phoneHref: "+18599797595",
@@ -19,22 +19,23 @@ export const navItems = [
 ];
 
 export const typedRoles = [
-  "Full-stack modernization engineer",
-  "React + TypeScript developer",
-  ".NET / SQL Server builder",
-  "Accessibility-minded problem solver"
+  "Full-stack Angular developer",
+  "Angular + TypeScript architect",
+  ".NET / ASP.NET Core engineer",
+  "Accessibility-first problem solver",
+  "Azure DevOps delivery engineer"
 ];
 
 export const aboutParagraphs = [
-  "I build scalable web applications across React, TypeScript, ASP.NET Core, C#, SQL Server, REST APIs, and Azure DevOps. My strongest work sits at the intersection of product-facing UI, backend business logic, database performance, and accessibility.",
-  "Recently, I have been modernizing the Missouri Child Support System by transforming legacy mainframe workflows into secure, responsive, accessible web modules with Razor Pages, SQL Server, Section 508 validation, NVDA, and JAWS.",
+  "I'm a Full Stack Angular Developer with mid-level experience delivering enterprise web applications across government, insurance, and education sectors. My work spans Angular, TypeScript, NgRx, RxJS, ASP.NET Core, C#, SQL Server, and Azure DevOps.",
+  "Currently at Deloitte, I'm modernizing the Missouri Child Support System — converting legacy mainframe workflows into secure, accessible ASP.NET Core Razor Pages modules integrated with REST APIs and SQL Server, verified with NVDA and JAWS before every UAT cycle.",
   "I like systems that feel calm to use: clear forms, predictable validation, fast data retrieval, useful error states, and code that another developer can maintain without guesswork."
 ];
 
 export const profileStats = [
   { value: "20+", label: "legacy screens modernized" },
-  { value: "3+", label: "years full-stack delivery" },
-  { value: "508", label: "accessibility-focused work" },
+  { value: "4+", label: "years full-stack delivery" },
+  { value: "508", label: "accessibility-verified screens" },
   { value: "3.88", label: "master's GPA" }
 ];
 
@@ -42,22 +43,22 @@ export const serviceCards = [
   {
     title: "Legacy Modernization",
     description:
-      "Convert mainframe and older workflows into maintainable web modules with accessible forms, clear validation, and stable release paths."
+      "Convert mainframe and older workflows into maintainable ASP.NET Core Razor Pages modules with accessible forms, clear validation, and stable release paths."
   },
   {
-    title: "React Product UI",
+    title: "Angular SPA Delivery",
     description:
-      "Build TypeScript interfaces with reusable components, data grids, filters, editable forms, loading states, and responsive layouts."
+      "Build Angular + TypeScript SPAs with feature modules, lazy-loaded routes, reactive forms, NgRx state, RxJS data flows, and Angular Material components."
   },
   {
     title: ".NET API Delivery",
     description:
-      "Develop ASP.NET Core APIs, Razor PageModels, service logic, Entity Framework Core data access, and REST integrations."
+      "Develop ASP.NET Core APIs, Web API endpoints, service logic, Entity Framework Core data access, and REST integrations with CQRS and MediatR."
   },
   {
     title: "Data & Quality",
     description:
-      "Tune SQL queries, support reporting workflows, debug defects across environments, and verify behavior through QA/UAT cycles."
+      "Tune SQL queries, stored procedures, and indexes on high-use screens, support Telerik Reporting, and drive defect resolution through QA, UAT, and accessibility checks."
   }
 ];
 
@@ -65,42 +66,45 @@ export const projectWork = [
   {
     title: "Missouri Child Support System Modernization",
     company: "Deloitte",
-    period: "Oct 2024 - Present",
+    period: "Oct 2024 – Present",
     category: "Enterprise",
     summary:
-      "Modernized legacy child-support workflows into secure, responsive modules for case management, payments, diary, notes, and business process screens.",
+      "Modernizing legacy child-support mainframe screens into secure, responsive, accessible web modules for case management, payments, diary, notes, and business process workflows.",
     impact: [
-      "Converted 20+ mainframe screens into ASP.NET Core and Razor Pages modules.",
-      "Built server-side validation, reusable UI patterns, modal overlays, masked inputs, filters, and responsive layouts.",
-      "Improved Section 508 and WCAG behavior with keyboard navigation, ARIA support, focus handling, NVDA, and JAWS.",
-      "Optimized SQL Server queries, stored procedures, joins, and data-access logic for high-use screens."
+      "Converted 20+ mainframe screens into ASP.NET Core Razor Pages modules, shipping each through Dev, QA/QC, and UAT environments.",
+      "Engineered Section 508 / WCAG accessibility — keyboard navigation, ARIA attributes, focus management — verified with NVDA and JAWS before UAT review.",
+      "Built a library of reusable UI patterns: date pickers, masked inputs, modal overlays, validation controls, search filters, and Razor partials.",
+      "Tuned SQL Server stored procedures, indexes, and execution plans on the application's most heavily used screens."
     ],
     stack: [
       "ASP.NET Core",
       "Razor Pages",
       "C#",
       "JavaScript",
+      "Bootstrap",
       "SQL Server",
       "REST APIs",
       "Azure DevOps"
     ]
   },
   {
-    title: "Cumberland Surety Bond Management Platform",
+    title: "Surety Bond Management Platform",
     company: "SITEK Inc",
-    period: "Aug 2024 - Oct 2024",
+    period: "Aug 2024 – Oct 2024",
     category: "Full Stack",
     summary:
-      "Developed a full-stack bond management platform supporting search, details, agent management, reporting, payments, inspections, renewals, collateral, and capital workflows.",
+      "Developed a full-stack Angular bond management platform digitizing bond operations — search, details, agent management, payments, renewals, inspections, collateral, and reporting.",
     impact: [
-      "Built React and TypeScript modules for high-use operational workflows.",
-      "Created reusable forms, dropdowns, search filters, validation logic, action buttons, data grids, and editable screens.",
-      "Integrated React screens with ASP.NET Core Web API services and SQL Server data sources.",
-      "Supported reporting with Telerik Reporting and SQL-backed operational data."
+      "Built 8 Angular modules using feature-based module organization, lazy-loaded routes, and reactive forms, giving users full visibility into the bond lifecycle.",
+      "Created a reusable Angular component set: reactive forms, data grids, dropdowns, search filters, and custom validators consistent across every workflow.",
+      "Integrated Angular screens with RESTful endpoints via HttpClient and RxJS observables, backed by Entity Framework Core data access in C#.",
+      "Tuned SQL Server stored procedures and indexes on high-use screens; delivered operational reporting with Telerik Reporting."
     ],
     stack: [
-      "React.js",
+      "Angular",
       "TypeScript",
+      "NgRx",
+      "RxJS",
       "ASP.NET Core Web API",
       "C#",
       "SQL Server",
@@ -111,22 +115,22 @@ export const projectWork = [
   {
     title: "University Academic Application Support",
     company: "Eastern Kentucky University",
-    period: "Aug 2023 - May 2024",
+    period: "Aug 2023 – May 2024",
     category: "Teaching",
     summary:
-      "Supported faculty, classroom applications, student labs, and computer science instruction while helping students unblock development issues.",
+      "Supported faculty, classroom applications, student labs, and CS instruction while helping students unblock development issues and build real-world skills.",
     impact: [
-      "Mentored students in HTML, CSS, Bootstrap, JavaScript, TypeScript, Angular, C#, and object-oriented programming.",
-      "Led lab sessions and office hours for debugging, assignment review, and local environment setup.",
-      "Supported academic applications and instructional resources for more reliable course delivery.",
-      "Helped troubleshoot UI behavior, validation issues, component structure, browser errors, and C# logic."
+      "Mentored students in HTML, CSS, JavaScript, TypeScript, Angular, C#, and object-oriented programming through lab sessions and office hours.",
+      "Maintained university academic applications, diagnosing UI, form-validation, configuration, and C# logic issues.",
+      "Standardized local development environment setup — Node.js, npm, Angular CLI, Git, Visual Studio, VS Code — reducing onboarding friction.",
+      "Led assignment reviews and debugging sessions, helping students resolve browser errors, component structure issues, and async logic."
     ],
     stack: [
+      "Angular",
+      "TypeScript",
+      "JavaScript",
       "HTML",
       "CSS",
-      "JavaScript",
-      "TypeScript",
-      "Angular",
       "C#",
       "Git"
     ]
@@ -134,24 +138,27 @@ export const projectWork = [
   {
     title: "Reactivities Activity Management App",
     company: "Dot Spiders",
-    period: "Jul 2021 - Mar 2023",
+    period: "Jul 2021 – Mar 2023",
     category: "Full Stack",
     summary:
-      "Built full-stack activity management features with React, ASP.NET Core Web API, Entity Framework Core, SQLite, and clean layered architecture.",
+      "Built a full-stack activity management platform from the ground up — an Angular TypeScript SPA over ASP.NET Core Web API, Entity Framework Core, and SQLite.",
     impact: [
-      "Delivered CRUD workflows for creating, searching, updating, deleting, and managing activities.",
-      "Designed API, Application, Domain, Persistence, and Client layers for maintainability.",
-      "Applied MediatR, CQRS, AutoMapper, DTOs, FluentValidation, dependency injection, and custom exception middleware.",
-      "Built responsive UI with Material UI, React Router, Axios, TanStack React Query, MobX, and React Toastify."
+      "Architected a 5-layer solution (API, Application, Domain, Persistence, Client) using MediatR and CQRS, decoupling request handling from business logic.",
+      "Built a responsive UI with Angular Material, Angular Router, RxJS, and NgRx for state management, handling routing, server state, and API communication via HttpClient.",
+      "Implemented FluentValidation rules and custom exception-handling middleware, standardizing request validation and reducing validation-related defects.",
+      "Drove code reviews, refactoring, and bug fixes through a feature-branch, pull-request workflow in Git with review checklists."
     ],
     stack: [
-      "React.js",
+      "Angular",
       "TypeScript",
-      "Vite",
+      "Angular Material",
+      "NgRx",
+      "RxJS",
       "ASP.NET Core",
-      "EF Core",
+      "Entity Framework Core",
       "SQLite",
-      "MediatR"
+      "MediatR",
+      "CQRS"
     ]
   }
 ];
@@ -200,49 +207,49 @@ export const githubProfile = {
 
 export const experience = [
   {
-    title: "Software Development Engineer-1",
+    title: "Software Development Engineer 1",
     organization: "Deloitte",
-    location: "Lexington-Fayette",
-    period: "Oct 2024 - Present",
+    location: "Austin, TX",
+    period: "Oct 2024 – Present",
     summary:
-      "Enterprise modernization across ASP.NET Core, Razor Pages, JavaScript, SQL Server, REST APIs, Azure DevOps, accessibility, QA/QC, UAT, and release support."
+      "Modernizing legacy mainframe screens into ASP.NET Core Razor Pages modules with Section 508 accessibility, SQL Server tuning, reusable UI patterns, and release support across Dev, QA/QC, and UAT environments."
   },
   {
     title: "Software Developer",
     organization: "SITEK Inc",
-    location: "Lexington",
-    period: "Aug 2024 - Oct 2024",
+    location: "Lexington, KY",
+    period: "Aug 2024 – Oct 2024",
     summary:
-      "Full-stack React, TypeScript, ASP.NET Core Web API, C#, Entity Framework Core, SQL Server, reporting, and Azure DevOps delivery for surety bond operations."
+      "Built a full-stack Angular + TypeScript bond management platform over ASP.NET Core Web API and SQL Server — 8 feature modules, NgRx state, RxJS observables, reactive forms, Entity Framework Core, and Telerik Reporting."
   },
   {
     title: "Graduate Assistant Programmer & Application Support Developer",
     organization: "Eastern Kentucky University",
-    location: "Richmond",
-    period: "Aug 2023 - May 2024",
+    location: "Richmond, KY",
+    period: "Aug 2023 – May 2024",
     summary:
-      "Academic application support, faculty assistance, lab preparation, student mentoring, debugging help, and local development environment setup."
+      "Academic application support, student mentoring in Angular, C#, and TypeScript, lab preparation, debugging assistance, and standardized local dev environment setup."
   },
   {
     title: "Software Developer",
     organization: "Dot Spiders",
     location: "Hyderabad, India",
-    period: "Jul 2021 - Mar 2023",
+    period: "Jul 2021 – Mar 2023",
     summary:
-      "React and ASP.NET Core application features, API work, EF Core persistence, SQLite, code reviews, refactoring, and Git-based collaboration."
+      "Built a full-stack Angular SPA with ASP.NET Core, Entity Framework Core, and SQLite using MediatR, CQRS, and a clean 5-layer architecture. Drove code quality through PR-based reviews and refactoring."
   }
 ];
 
 export const education = [
   {
     school: "Eastern Kentucky University",
-    credential: "Master's degree, Computer Science",
+    credential: "Master's Degree, Computer Science",
     detail: "GPA: 3.88",
-    location: "Richmond, KY, United States"
+    location: "Richmond, KY"
   },
   {
     school: "Parul University",
-    credential: "Bachelor's degree, Computer Science",
+    credential: "Bachelor's Degree, Computer Science",
     detail: "GPA: 3.75",
     location: "Gujarat, India"
   }
@@ -250,46 +257,44 @@ export const education = [
 
 export const certifications = [
   {
-    title: "Meta React Developer Certificate",
-    focus: "React, JavaScript, JSX, state, routing, forms, APIs, responsive UI, Git/GitHub"
-  },
-  {
-    title: "Microsoft Certified: Azure Developer Associate",
-    focus: "Azure app development, cloud services, authentication, deployment, monitoring, storage"
-  },
-  {
-    title: "Google Data Analytics Professional Certificate",
-    focus: "SQL, data cleaning, spreadsheets, dashboards, reporting, business insights"
+    title: "Microsoft Certified: Azure Developer Associate (AZ-204)",
+    focus: "Azure app development, cloud services, authentication, deployment, monitoring, and storage"
   },
   {
     title: "Microsoft ASP.NET Developer Certificate",
-    focus: "C#, ASP.NET Core, MVC/Web API, Razor Pages, Entity Framework, SQL Server"
+    focus: "C#, ASP.NET Core, MVC / Web API, Razor Pages, Entity Framework Core, SQL Server"
   },
   {
-    title: "AI for Everyone Coursera Certificate",
-    focus: "AI concepts, responsible adoption, automation opportunities, and practical applications"
+    title: "Getting Started with Angular — Edureka (Coursera), 2026",
+    focus: "Angular architecture, components, modules, routing, reactive forms, RxJS, and state management"
+  },
+  {
+    title: "Introduction to Software Engineering — IBM (Coursera), 2025",
+    focus: "SDLC, Agile, DevOps principles, CI/CD, software architecture, and engineering practices"
   }
 ];
 
 export const stackGroups = [
   {
     label: "Frontend",
-    summary: "Interfaces, forms, routing, and responsive product workflows.",
+    summary: "Angular-first SPA delivery with TypeScript, NgRx, RxJS, and reactive forms.",
     items: [
-      "React.js",
+      "Angular",
       "TypeScript",
+      "RxJS",
+      "NgRx",
+      "Angular Material",
+      "React.js",
       "JavaScript",
       "HTML5",
       "CSS3",
       "Bootstrap",
-      "jQuery",
-      "AJAX",
-      "Angular"
+      "jQuery"
     ]
   },
   {
     label: "Backend",
-    summary: "Application services, APIs, Razor modules, and business logic.",
+    summary: "Server-side APIs, Razor modules, business logic, and middleware.",
     items: [
       "C#",
       ".NET",
@@ -303,7 +308,7 @@ export const stackGroups = [
   },
   {
     label: "Data",
-    summary: "SQL-backed workflows, reporting, persistence, and tuning.",
+    summary: "SQL-backed workflows, stored procedures, reporting, and tuning.",
     items: [
       "SQL Server",
       "SQLite",
@@ -315,7 +320,7 @@ export const stackGroups = [
   },
   {
     label: "Delivery",
-    summary: "Team workflows, release support, debugging, and secure delivery.",
+    summary: "Team workflows, CI/CD pipelines, release management, and secure delivery.",
     items: [
       "Azure DevOps",
       "Git",
@@ -324,43 +329,60 @@ export const stackGroups = [
       "Jira",
       "Visual Studio",
       "VS Code",
-      "Agile Delivery",
-      "Secure Software Development"
+      "Agile Delivery"
     ]
   },
   {
     label: "Libraries",
-    summary: "Practical tooling for API state, validation, mapping, auth, and UI.",
+    summary: "Angular ecosystem tooling, validation, mapping, API patterns, and reporting.",
     items: [
-      "React Query",
-      "MobX",
-      "Axios",
+      "HttpClient",
       "MediatR",
+      "CQRS",
       "AutoMapper",
       "FluentValidation",
       "JWT",
-      "Material UI",
+      "Telerik Reporting",
       "API Integration"
     ]
   },
   {
     label: "Accessibility & AI",
-    summary: "Verification habits that improve usability and development speed.",
+    summary: "Accessibility verification habits and AI-assisted development tools.",
     items: [
+      "Section 508",
+      "WCAG",
+      "ARIA",
       "JAWS",
       "NVDA",
-      "WCAG",
-      "Section 508",
-      "AI-Assisted Code Review",
       "Claude Code",
-      "Prompt-Driven Development"
+      "AI-Assisted Development",
+      "Prompt Engineering"
     ]
   }
 ];
 
 export const workflowNotes = [
-  "Clarify workflow rules before designing screens.",
-  "Prefer reusable UI patterns with visible states and keyboard support.",
+  "Clarify workflow rules and business logic before designing screens.",
+  "Prefer reusable Angular components with visible states and keyboard support.",
   "Keep API, data-access, and validation logic aligned with the business process.",
   "Validate releases through QA, UAT, accessibility checks, and documentation."
+];
+
+export const currently = [
+  {
+    label: "Building",
+    value: "Missouri Child Support System",
+    detail: "Enterprise modernization at Deloitte — converting 20+ legacy mainframe screens into accessible ASP.NET Core / Razor Pages modules"
+  },
+  {
+    label: "Exploring",
+    value: "AI-Assisted Development",
+    detail: "Prompt engineering, Claude Code workflows, and AI-augmented code review in production-grade Angular and .NET projects"
+  },
+  {
+    label: "Open to",
+    value: "Full-Stack / Angular Roles",
+    detail: "Engineering positions where Angular architecture, backend reliability, accessibility, and product quality are first-class concerns"
+  }
 ];
