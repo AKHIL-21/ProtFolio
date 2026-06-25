@@ -1,0 +1,29 @@
+[
+  {
+    "name": "MACSS Modernization",
+    "tagline": "Mainframe → accessible web",
+    "desc": "Modernized 20+ legacy mainframe screens for the Missouri Child Support System into secure, responsive, Section 508 / WCAG-accessible ASP.NET Core Razor Pages backed by REST APIs and SQL Server stored procedures.",
+    "tech": ["ASP.NET Core", "C#", "Razor Pages", "REST APIs", "SQL Server", "WCAG / 508"],
+    "art": "modernization",
+    "category": "enterprise",
+    "links": {}
+  },
+  {
+    "name": "CSI 2.0 – Surety Bond Platform",
+    "tagline": "End-to-end bond management",
+    "desc": "Full-stack surety bond platform digitizing Bond Search, Agent Management, Payments, Renewal / Billing, Inspections, Collateral, and Reports over an ASP.NET Core Web API and EF Core backend.",
+    "tech": ["Angular", "TypeScript", "RxJS", "ASP.NET Core", "EF Core", "SQL Server"],
+    "art": "surety",
+    "category": "fullstack",
+    "links": {}
+  },
+  {
+    "name": "Activity Management Platform",
+    "tagline": "CQRS task-tracking SPA",
+    "desc": "Activity and task-tracking SPA with full CRUD on a clean 5-layer architecture, applying MediatR / CQRS, FluentValidation, AutoMapper, and Entity Framework Core.",
+    "tech": ["Angular", "Angular Material", "ASP.NET Core", "MediatR / CQRS", "EF Core", "SQLite"],
+    "art": "activity",
+    "category": "fullstack",
+    "links": {}
+  }
+]
