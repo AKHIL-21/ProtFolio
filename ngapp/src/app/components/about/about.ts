@@ -15,7 +15,7 @@ import VanillaTilt from 'vanilla-tilt';
           <h3>I'm Akhil</h3>
           <span class="tag">Full Stack Software Development Engineer (.NET / Angular)</span>
 
-          <p>I am a Full Stack Software Development Engineer based in Austin, TX, with
+          <p>I am a Full Stack Software Development Engineer based in San Francisco, CA, with
             experience delivering enterprise web applications across government, insurance,
             and education. I work with C# / .NET Core, ASP.NET Core, Angular, TypeScript,
             SQL Server, Entity Framework Core, and Azure. I am currently modernizing the
@@ -26,7 +26,7 @@ import VanillaTilt from 'vanilla-tilt';
           <div class="box-container">
             <div class="box">
               <p><span> email : </span> akhilnmuthyala&#64;gmail.com</p>
-              <p><span> place : </span> Austin, TX</p>
+              <p><span> place : </span> San Francisco, CA</p>
             </div>
           </div>
 

@@ -25,7 +25,7 @@ import { RouterLink } from '@angular/router';
         <div class="box">
           <h3>contact info</h3>
           <p><i class="fas fa-envelope"></i>akhilnmuthyala&#64;gmail.com</p>
-          <p><i class="fas fa-map-marked-alt"></i>Austin, TX</p>
+          <p><i class="fas fa-map-marked-alt"></i>San Francisco, CA</p>
           <div class="share">
             <a href="https://www.linkedin.com/in/akhil-n-muthyala-78199b1b8" class="fab fa-linkedin" aria-label="LinkedIn" target="_blank" rel="noopener"></a>
             <a href="https://github.com/AKHIL-21" class="fab fa-github" aria-label="GitHub" target="_blank" rel="noopener"></a>

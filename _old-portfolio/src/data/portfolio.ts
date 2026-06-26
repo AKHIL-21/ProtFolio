@@ -1,7 +1,7 @@
 export const contact = {
   name: "Akhil N Muthyala",
   role: "Full Stack Angular & .NET Developer",
-  location: "Austin, TX, United States",
+  location: "San Francisco, CA, United States",
   email: "akhilnmuthyala@gmail.com",
   phone: "(859) 979-7595",
   phoneHref: "+18599797595",
@@ -209,7 +209,7 @@ export const experience = [
   {
     title: "Software Development Engineer 1",
     organization: "Deloitte",
-    location: "Austin, TX",
+    location: "San Francisco, CA",
     period: "Oct 2024 – Present",
     summary:
       "Modernizing legacy mainframe screens into ASP.NET Core Razor Pages modules with Section 508 accessibility, SQL Server tuning, reusable UI patterns, and release support across Dev, QA/QC, and UAT environments."
